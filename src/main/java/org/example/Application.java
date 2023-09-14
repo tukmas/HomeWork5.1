@@ -1,36 +1,29 @@
 package org.example;
 
+import org.example.DAO.EmployeeDAO;
+import org.example.DAO.EmployeeDAOImpl;
+import org.example.model.Employee;
+
 import java.sql.*;
+import java.util.List;
 
 public class Application {
     public static void main(String[] args) throws SQLException {
-        final String user = "postgres";
-        final String password = "123456789qwe";
-        final String url = "jdbc:postgresql://localhost:5432/skypro";
+        EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+        Employee employee1 = new Employee(1, "Сергей", "Тукмачев", "М", 26, 1);
 
-        try (final Connection connection =
-                     DriverManager.getConnection(url, user, password);
-             PreparedStatement statement =
-                     connection.prepareStatement("SELECT first_name, " +
-                             "last_name, gender, age, city_id FROM employee where id = 2")) {
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                String nameOfEmployee = resultSet.getString("first_name");
-                String lastNameOfEmployee = resultSet.getString("last_name");
-                String genderOfEmployee = resultSet.getString("gender");
-                int ageOfEmployee = resultSet.getInt("age");
-                int cityIdOfEmployee = resultSet.getInt("city_id");
+        employeeDAO.createEmployee(employee1);
 
-                System.out.println(nameOfEmployee);
-                System.out.println(lastNameOfEmployee);
-                System.out.println(genderOfEmployee);
-                System.out.println(ageOfEmployee);
-                System.out.println(cityIdOfEmployee);
-            }
+        System.out.println(employeeDAO.getEmployeeById(1));
 
-        } catch (SQLException e) {
-            System.out.println("Ошибка при подключении к базе данных!");
-            e.printStackTrace();
+        List<Employee> list = employeeDAO.getAllEmployes();
+        for (Employee book : list) {
+            System.out.println(book);
         }
+        Employee employee2 = new Employee(2, "Евгений", "Колпаков", "М", 25, 1);
+
+        employeeDAO.updateEmployee(employee2);
+
+        employeeDAO.deleteEmployee(employee2);
     }
 }

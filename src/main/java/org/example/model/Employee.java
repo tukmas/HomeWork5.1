@@ -2,21 +2,33 @@ package org.example.model;
 
 import lombok.*;
 
+import javax.persistence.*;
+
 
 @ToString
 @EqualsAndHashCode
 
-
+@Entity
+@Table(name = "employee")
 public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "lastname")
     private String lastname;
+    @Column(name = "gender")
     private String gender;
+
+    @Column(name = "age")
     private int age;
 
+    @Column(name = "cityId")
     private int cityId;
+
 
     public Employee(int id, String name, String lastname, String gender, int age, int cityId) {
         this.id = id;
