@@ -26,9 +26,9 @@ public class Employee {
     @Column(name = "age")
     private int age;
 
-    @Column(name = "cityId")
+    @ManyToOne
+    @JoinColumn(name = "city_id")
     private int cityId;
-
 
     public Employee(int id, String name, String lastname, String gender, int age, int cityId) {
         this.id = id;
@@ -41,7 +41,6 @@ public class Employee {
     public Employee() {
 
     }
-
 
     public int getId() {
         return id;

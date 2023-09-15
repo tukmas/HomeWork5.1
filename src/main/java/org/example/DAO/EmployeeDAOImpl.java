@@ -8,19 +8,17 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
-    final String user = "postgres";
-    final String password = "Zxc13579";
-    final String url = "jdbc:postgresql://localhost:5432/skypro";
-
     @Override
     public List<Employee> getAllEmployes() {
-        List<Employee> users = (List<Employee>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Employee").list();
-        return users;
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();) {
+            return session.createQuery("FROM Employee").list();
+        }
     }
-
     @Override
     public Employee getEmployeeById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Employee.class, id);
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
+            return session.get(Employee.class, id);
+        }
     }
 
     @Override
