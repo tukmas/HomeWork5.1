@@ -14,7 +14,7 @@ public class Application {
     public static void main(String[] args) throws SQLException {
         EmployeeDAO employeeDAO = new EmployeeDAOImpl();
         CityDao cityDao = new CityDaoImpl();
-        Employee employee1 = new Employee(1, "Сергей", "Тукмачев", "М", 26, 1);
+        Employee employee1 = new Employee(1, "Сергей", "Тукмачев", "М", 26, null);
         City city = cityDao.getCityById(cityDao.addCity(new City("Ижевск", null)));
 
         employeeDAO.createEmployee(employee1);
@@ -26,7 +26,7 @@ public class Application {
         for (Employee employee : list) {
             System.out.println(employee);
         }
-        Employee employee2 = new Employee(2, "Евгений", "Колпаков", "М", 25, 1);
+        Employee employee2 = new Employee(2, "Евгений", "Колпаков", "М", 25, null);
 
         employeeDAO.updateEmployee(employee2);
         cityDao.updateCity(city);

@@ -27,16 +27,15 @@ public class Employee {
     private int age;
 
     @ManyToOne
-    @JoinColumn(name = "city_id")
-    private int cityId;
+    private City city;
 
-    public Employee(int id, String name, String lastname, String gender, int age, int cityId) {
+    public Employee(int id, String name, String lastname, String gender, int age, City city) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.gender = gender;
         this.age = age;
-        this.cityId = cityId;
+        this.city = city;
     }
     public Employee() {
 
@@ -82,11 +81,11 @@ public class Employee {
         this.age = age;
     }
 
-    public int getCityId() {
-        return cityId;
+    public City getCity() {
+        return city;
     }
 
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
+    public void setCity(City city) {
+        this.city = city;
     }
 }
